@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "468970936671",
+    "firebase_url": "https://meca-app-ebc7d-default-rtdb.firebaseio.com",
+    "project_id": "meca-app-ebc7d",
+    "storage_bucket": "meca-app-ebc7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468970936671:android:d0bd914c9bed0ce72c7eea",
+        "android_client_info": {
+          "package_name": "com.example.meca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468970936671-1b40fo85j7m52h9m8mi8keajmuqt2c4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmZETmxRxBEL0DqfgZ_o4PDR2DDUSbYzY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468970936671-1b40fo85j7m52h9m8mi8keajmuqt2c4i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
