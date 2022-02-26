@@ -16,100 +16,52 @@
         <TextView
             android:id="@+id/activity_main_tv_empty"
             style="@style/InformationTextView"
-            android:layout_width="87dp"
-            android:layout_height="48dp"
+            android:layout_width="104dp"
+            android:layout_height="142dp"
+            android:rotation="90"
             android:text="Power"
             android:textColor="@color/black"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.413"
+            app:layout_constraintHorizontal_bias="0.442"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.106" />
-
-        <Button
-            android:id="@+id/buttonoffpower"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="OFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.577"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.176" />
-
-        <Button
-            android:id="@+id/buttononpower"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="ON"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.238"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.171" />
+            app:layout_constraintVertical_bias="0.022" />
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="@dimen/empty_icon_width"
-            android:layout_height="120dp"
+            android:layout_width="196dp"
+            android:layout_height="398dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="10dp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.456"
+            app:layout_constraintHorizontal_bias="0.417"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.318"
+            app:layout_constraintVertical_bias="0.511"
             app:srcCompat="@drawable/screenshot" />
-
-        <Button
-            android:id="@+id/buttonoffmoter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="OFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.618"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.477" />
-
-        <Button
-            android:id="@+id/buttononmoter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ON"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.269"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.477" />
 
         <Switch
             android:id="@+id/power"
-            android:layout_width="97dp"
-            android:layout_height="50dp"
+            android:layout_width="96dp"
+            android:layout_height="95dp"
+            android:rotation="90"
             android:showText="true"
             android:textOff="OFF"
             android:textOn="ON"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.993"
+            app:layout_constraintHorizontal_bias="0.431"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.105"
-            tools:checked="false" />
+            app:layout_constraintVertical_bias="0.171"
+            tools:checked="false"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <Switch
             android:id="@+id/switch2"
@@ -120,11 +72,12 @@
             android:textOn="ON"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.993"
+            app:layout_constraintHorizontal_bias="0.525"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.336"
-            tools:checked="false" />
+            app:layout_constraintVertical_bias="0.913"
+            tools:checked="false"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!-- Left Menu -->

@@ -76,10 +76,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        btnPoweron= findViewById(R.id.buttononpower);
-        btnPoweroff= findViewById(R.id.buttonoffpower);
-        btnmotoron= findViewById(R.id.buttononmoter);
-        btnmotoroff= findViewById(R.id.buttonoffmoter);
         btnPower = findViewById(R.id.power);
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -94,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
                     //  }
                 });
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(MainActivity.this, "Not found data!", Toast.LENGTH_LONG).show();
@@ -111,31 +106,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        btnPoweroff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDatabase.child("Power").child("Value").setValue("OFF");
-            }
-        });
-        btnPoweron.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDatabase.child("Power").child("Value").setValue("ON");
-            }
-        });
-        btnmotoroff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDatabase.child("Motor").child("Value").setValue("OFF");
-            }
-        });
-        btnmotoron.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDatabase.child("Motor").child("Value").setValue("ON");
-            }
-        });
+//        btnmotoron.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mDatabase.child("Motor").child("Value").setValue("ON");
+//            }
+//        });
     }
 
     @Override

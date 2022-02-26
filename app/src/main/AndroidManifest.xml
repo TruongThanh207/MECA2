@@ -42,14 +42,10 @@
         <activity
             android:name=".DevicesActivity"
             android:exported="false">
-
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.meca.ScanActivity" />
         </activity>
-        <activity
-            android:name=".ScanActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DevicesActivity"
-            android:exported="false"></activity>
     </application>
 
 </manifest>
