@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.meca"
-        minSdk 21
+        minSdk 28j
         targetSdk 31
         versionCode 1
         versionName "1.0"

@@ -11,10 +11,11 @@
         <entry key="..\:/MECA/app/src/main/res/layout/activity_scan.xml" value="0.1" />
         <entry key="..\:/MECA/app/src/main/res/menu/main_actions.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Hung/AndroidStudioProjects/MECA/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/tvtha/Desktop/MECA2/app/src/main/res/layout/activity_main.xml" value="0.19166666666666668" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
