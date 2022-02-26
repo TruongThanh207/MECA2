@@ -73,7 +73,6 @@ public class RegisterActivity extends AppCompatActivity {
         tvPassword = (EditText) findViewById(R.id.editTextPasswordRegister);
         btnRegister = (Button) findViewById(R.id.buttonRegister);
     }
-//phia duoi    String txtEmail, String txtPassword
     private void registerUser() {
         pd.setMessage("Please Wail!");
         pd.show();
@@ -104,6 +103,9 @@ public class RegisterActivity extends AppCompatActivity {
 ////                            updateUI(user);
                             Toast.makeText(RegisterActivity.this, "Successful!", Toast.LENGTH_SHORT).show();
 //                            Log.d("adsad", user.getEmail());
+                            pd.dismiss();
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "createUserWithEmail:failure", task.getException());

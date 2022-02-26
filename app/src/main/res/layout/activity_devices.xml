@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".DevicesActivity">
 
+
+    <TextView
+        android:id="@+id/textViewpdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View PDF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="210dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

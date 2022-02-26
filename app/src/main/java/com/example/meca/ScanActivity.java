@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 //import android.content.Intent;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -19,9 +20,6 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
-
-
-
 
 public class ScanActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
@@ -45,6 +43,7 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if(result.getText().split(";", 5).length == 3){
+
 //                            Intent intent = new Intent(ScanActivity.this, EditActivity.class);
 //                            intent.putExtra("DATA", result.getText());
 //                            startActivity(intent);
