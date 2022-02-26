@@ -3,6 +3,7 @@ package com.example.meca;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,14 +13,19 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,6 +82,25 @@ public class MainActivity extends AppCompatActivity {
         btnmotoroff= findViewById(R.id.buttonoffmoter);
         btnPower = findViewById(R.id.power);
 
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataSnapshot.getChildren().forEach(m -> {
+                    if ("Power".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) btnPower.setChecked(true);
+                    }
+                    //  if ("XYZ".equals(Objects.requireNonNull(m.getKey()))) {
+                    //      if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) btnXYZ.setChecked(true);
+                    //  }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(MainActivity.this, "Not found data!", Toast.LENGTH_LONG).show();
+            }
+        });
+
         btnPower.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -86,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         btnPoweroff.setOnClickListener(new View.OnClickListener() {
             @Override
