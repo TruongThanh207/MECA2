@@ -42,13 +42,18 @@ public class ScanActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(result.getText().split(";", 5).length == 3){
-
-//                            Intent intent = new Intent(ScanActivity.this, EditActivity.class);
-//                            intent.putExtra("DATA", result.getText());
-//                            startActivity(intent);
-//                            finish();
-                            Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                        if(!result.getText().isEmpty()){
+                            String root = "com.example.meca.";
+                            String activity = root.concat(result.getText().concat("Activity"));
+                            Intent intent = null;
+                            try {
+                                intent = new Intent(ScanActivity.this, Class.forName(activity));
+                            } catch (ClassNotFoundException e) {
+                                e.getException();
+                            }
+                            intent.putExtra("DATA", result.getText());
+                            startActivity(intent);
+                            finish();
                         }else{
                             Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
                         }

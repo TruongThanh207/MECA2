@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private DatabaseReference mDatabase;
-    Button btnPoweron,btnPoweroff, btnmotoron,btnmotoroff;
+    Button btnPoweron,btnPoweroff, btnmotoron,btnmotoroff, btnPower;
 
     TextView tvHome,tvlogout,tvdevices;
     @Override
@@ -71,6 +71,16 @@ public class MainActivity extends AppCompatActivity {
         btnPoweroff= findViewById(R.id.buttonoffpower);
         btnmotoron= findViewById(R.id.buttononmoter);
         btnmotoroff= findViewById(R.id.buttonoffmoter);
+        btnPower = findViewById(R.id.power);
+
+        btnPower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, btnPower.getText(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
         btnPoweroff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

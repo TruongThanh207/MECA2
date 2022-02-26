@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,6 +28,7 @@ public class DevicesActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         myRef.setValue("Hello, World!");
 
+        Toast.makeText(DevicesActivity.this, "device context", Toast.LENGTH_SHORT).show();
 
 //        btntest= findViewById(R.id.buttontest);
 //        btntest1= findViewById(R.id.buttontest1);
