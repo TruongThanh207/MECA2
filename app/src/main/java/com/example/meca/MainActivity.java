@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,14 +15,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
+    private DatabaseReference mDatabase;
+    Button btnPoweron,btnPoweroff, btnmotoron,btnmotoroff;
 
-    TextView tvHome,tvlogout;
+    TextView tvHome,tvlogout,tvdevices;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvHome = findViewById(R.id.home);
         tvlogout =findViewById(R.id.logoutacc);
+        tvdevices = findViewById(R.id.devices);
 
         drawerLayout = findViewById(R.id.activity_main_drawer);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -52,6 +58,41 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this, "Logout Successfull!", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
+        tvdevices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DevicesActivity.class));
+            }
+        });
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        btnPoweron= findViewById(R.id.buttononpower);
+        btnPoweroff= findViewById(R.id.buttonoffpower);
+        btnmotoron= findViewById(R.id.buttononmoter);
+        btnmotoroff= findViewById(R.id.buttonoffmoter);
+        btnPoweroff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDatabase.child("Power").child("Value").setValue("OFF");
+            }
+        });
+        btnPoweron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDatabase.child("Power").child("Value").setValue("ON");
+            }
+        });
+        btnmotoroff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDatabase.child("Motor").child("Value").setValue("OFF");
+            }
+        });
+        btnmotoron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDatabase.child("Motor").child("Value").setValue("ON");
             }
         });
     }

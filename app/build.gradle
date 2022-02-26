@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.meca"
-        minSdk 28j
+        minSdk 28
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -56,5 +56,7 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.bumptech.glide:glide:4.13.0'
+
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 }
 apply plugin: 'com.google.gms.google-services'
