@@ -101,6 +101,8 @@
             android:layout_width="97dp"
             android:layout_height="50dp"
             android:showText="true"
+            android:textOff="OFF"
+            android:textOn="ON"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.993"

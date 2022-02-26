@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private DatabaseReference mDatabase;
-    Button btnPoweron,btnPoweroff, btnmotoron,btnmotoroff, btnPower;
+    Button btnPoweron,btnPoweroff, btnmotoron,btnmotoroff;
+    Switch btnPower;
 
     TextView tvHome,tvlogout,tvdevices;
     @Override
@@ -73,10 +76,14 @@ public class MainActivity extends AppCompatActivity {
         btnmotoroff= findViewById(R.id.buttonoffmoter);
         btnPower = findViewById(R.id.power);
 
-        btnPower.setOnClickListener(new View.OnClickListener() {
+        btnPower.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, btnPower.getText(), Toast.LENGTH_LONG).show();
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    mDatabase.child("Power").child("Value").setValue("ON");
+                } else {
+                    mDatabase.child("Power").child("Value").setValue("OFF");
+                }
             }
         });
 
