@@ -16,8 +16,8 @@
         <TextView
             android:id="@+id/activity_main_tv_empty"
             style="@style/InformationTextView"
-            android:layout_width="104dp"
-            android:layout_height="142dp"
+            android:layout_width="77dp"
+            android:layout_height="41dp"
             android:rotation="90"
             android:text="Power"
             android:textColor="@color/black"
@@ -25,19 +25,20 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.442"
+            app:layout_constraintHorizontal_bias="0.952"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.022" />
+            app:layout_constraintVertical_bias="0.023" />
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/conveyor"
             android:layout_width="196dp"
             android:layout_height="398dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="10dp"
             android:scaleType="fitCenter"
+            android:rotation="180"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.417"
@@ -48,28 +49,29 @@
 
         <Switch
             android:id="@+id/power"
-            android:layout_width="96dp"
-            android:layout_height="95dp"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
             android:rotation="90"
             android:showText="true"
             android:textOff="OFF"
             android:textOn="ON"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.431"
+            app:layout_constraintHorizontal_bias="0.92"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.171"
+            app:layout_constraintTop_toBottomOf="@+id/activity_main_tv_empty"
+            app:layout_constraintVertical_bias="0.077"
             tools:checked="false"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <Switch
-            android:id="@+id/switch2"
-            android:layout_width="97dp"
-            android:layout_height="50dp"
+            android:id="@+id/switchmotor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:showText="true"
             android:textOff="OFF"
             android:textOn="ON"
+            android:rotation="90"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.525"
@@ -78,6 +80,77 @@
             app:layout_constraintVertical_bias="0.913"
             tools:checked="false"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <TextView
+            android:id="@+id/CountHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:rotation="90"
+            android:text="Count High"
+            app:layout_constraintBottom_toTopOf="@+id/CountMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.698" />
+
+        <TextView
+            android:id="@+id/CountMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="76dp"
+            android:rotation="90"
+            android:text="Count Medium"
+            app:layout_constraintBottom_toTopOf="@+id/CountLow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/CountLow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="316dp"
+            android:rotation="90"
+            android:text="Count Low"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCLow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="316dp"
+            android:rotation="90"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.86"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="76dp"
+            android:rotation="90"
+            app:layout_constraintBottom_toTopOf="@+id/tvCLow"
+            app:layout_constraintEnd_toEndOf="@+id/CountMedium"
+            app:layout_constraintHorizontal_bias="0.86"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rotation="90"
+            app:layout_constraintBottom_toTopOf="@+id/tvCMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.863"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.697" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!-- Left Menu -->
@@ -191,13 +264,36 @@
                 <ImageView
                     android:layout_width="@dimen/navigation_item_icon_size"
                     android:layout_height="@dimen/navigation_item_icon_size"
-                    android:src="@drawable/build_circle_black_24dp" />
+                    android:src="@drawable/engineering" />
                 <TextView
                     android:id="@+id/maintenance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp"
                     android:text="Bảo trì " />
+
+            </LinearLayout>
+            <!-- diagram -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/navigation_item_height"
+                android:layout_marginTop="3dp"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:layout_width="@dimen/navigation_item_icon_size"
+                    android:layout_height="@dimen/navigation_item_icon_size"
+                    android:src="@drawable/software_development" />
+                <TextView
+                    android:id="@+id/diagram"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="Sơ đồ đấu nối dây" />
 
             </LinearLayout>
             <!--reset pass -->

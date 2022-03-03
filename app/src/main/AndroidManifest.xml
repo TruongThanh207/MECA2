@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MECA">
         <activity
+            android:name=".InfoDeviceActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewpdfActivity"
             android:exported="false" />
         <activity
@@ -27,15 +30,26 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
+            android:name=".HmiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlcActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InverterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MotorActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ScanActivity"
             android:exported="false" />

@@ -19,7 +19,10 @@ import android.widget.Toast;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.meca.model.Devices;
 import com.google.zxing.Result;
+
+import java.io.Serializable;
 
 public class ScanActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
@@ -29,11 +32,25 @@ public class ScanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
         setPermission();
-        codeScanned();
 
+        Devices[] myListData = new Devices[] {
+                new Devices("Email", android.R.drawable.ic_dialog_email),
+                new Devices("Info", android.R.drawable.ic_dialog_info),
+                new Devices("Delete", android.R.drawable.ic_delete),
+                new Devices("Dialer", android.R.drawable.ic_dialog_dialer),
+//                new Devices("Alert", android.R.drawable.ic_dialog_alert),
+//                new Devices("Map", android.R.drawable.ic_dialog_map),
+//                new Devices("Email", android.R.drawable.ic_dialog_email),
+//                new Devices("Info", android.R.drawable.ic_dialog_info),
+//                new Devices("Delete", android.R.drawable.ic_delete),
+//                new Devices("Dialer", android.R.drawable.ic_dialog_dialer),
+//                new Devices("Alert", android.R.drawable.ic_dialog_alert),
+//                new Devices("Map", android.R.drawable.ic_dialog_map),
+        };
+        codeScanned(myListData);
     }
 
-    private void codeScanned() {
+    private void codeScanned(Devices[] myListData) {
         CodeScannerView scannerView = findViewById(R.id.scan_view);
         mCodeScanner = new CodeScanner(this, scannerView);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
@@ -43,17 +60,28 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if(!result.getText().isEmpty()){
-                            String root = "com.example.meca.";
-                            String activity = root.concat(result.getText().concat("Activity"));
-                            Intent intent = null;
-                            try {
-                                intent = new Intent(ScanActivity.this, Class.forName(activity));
-                            } catch (ClassNotFoundException e) {
-                                e.getException();
+//                            String root = "com.example.meca.";
+//                            String activity = root.concat(result.getText().concat("Activity"));
+//                            Intent intent = null;
+//                            try {
+//                                intent = new Intent(ScanActivity.this, Class.forName(activity));
+//                            } catch (ClassNotFoundException e) {
+//                                e.getException();
+//                            }
+//                            intent.putExtra("DATA", result.getText());
+//                            startActivity(intent);
+//                            finish();
+//   //                         startActivity(new Intent(ScanActivity.this, InfoDeviceActivity.class));
+                            for(Devices num : myListData){
+                                if (num.getName().equals(result.getText())){
+                                    Intent intent = new Intent(ScanActivity.this, InfoDeviceActivity.class);
+                                    intent.putExtra("data",(Serializable) num);
+                                    startActivity(intent);
+                                    break;
+                                }
+                                
                             }
-                            intent.putExtra("DATA", result.getText());
-                            startActivity(intent);
-                            finish();
+
                         }else{
                             Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
                         }

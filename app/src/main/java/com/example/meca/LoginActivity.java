@@ -2,6 +2,7 @@ package com.example.meca;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvEmail, tvPassword;
 
     FirebaseAuth mAuth;
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.buttonLogin);
 
         mAuth = FirebaseAuth.getInstance();
+        pd = new ProgressDialog(this);
 
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,10 +62,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String txtEmail, String txtPassword) {
+        pd.setMessage("Please Wail!");
+        pd.show();
         mAuth.signInWithEmailAndPassword(txtEmail, txtPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                Toast.makeText(LoginActivity.this, "Login Successfull!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginActivity.this, "Login Successfull!", Toast.LENGTH_SHORT).show();
+                pd.dismiss();
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             }

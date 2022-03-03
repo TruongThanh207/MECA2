@@ -32,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private DatabaseReference mDatabase;
-    Button btnPoweron,btnPoweroff, btnmotoron,btnmotoroff;
-    Switch btnPower;
-
+    Switch btnPower, btnMotor;
+    TextView tvDataLow,tvDataMedium,tvDataHigh;
     TextView tvHome,tvlogout,tvdevices;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         tvHome = findViewById(R.id.home);
         tvlogout =findViewById(R.id.logoutacc);
         tvdevices = findViewById(R.id.devices);
+
+        tvDataHigh = findViewById(R.id.tvCHigh);
+        tvDataMedium = findViewById(R.id.tvCMedium);
+        tvDataLow = findViewById(R.id.tvCLow);
+        GetDatabase();
 
         drawerLayout = findViewById(R.id.activity_main_drawer);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         });
         mDatabase = FirebaseDatabase.getInstance().getReference();
         btnPower = findViewById(R.id.power);
+        btnMotor = findViewById(R.id.switchmotor);
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,6 +89,11 @@ public class MainActivity extends AppCompatActivity {
                 dataSnapshot.getChildren().forEach(m -> {
                     if ("Power".equals(Objects.requireNonNull(m.getKey()))) {
                         if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) btnPower.setChecked(true);
+                        else btnPower.setChecked(false);
+                    }
+                    if ("Motor".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) btnMotor.setChecked(true);
+                        else btnMotor.setChecked(false);
                     }
                     //  if ("XYZ".equals(Objects.requireNonNull(m.getKey()))) {
                     //      if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) btnXYZ.setChecked(true);
@@ -103,6 +113,16 @@ public class MainActivity extends AppCompatActivity {
                     mDatabase.child("Power").child("Value").setValue("ON");
                 } else {
                     mDatabase.child("Power").child("Value").setValue("OFF");
+                }
+            }
+        });
+        btnMotor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    mDatabase.child("Motor").child("Value").setValue("ON");
+                } else {
+                    mDatabase.child("Motor").child("Value").setValue("OFF");
                 }
             }
         });
@@ -156,6 +176,49 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void GetDatabase(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Count High/Value");
+        DatabaseReference myRef1 = database.getReference("Count Medium/Value");
+        DatabaseReference myRef2 = database.getReference("Count Low/Value");
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                tvDataHigh.setText(value);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+        myRef1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                tvDataMedium.setText(value);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+        myRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                tvDataLow.setText(value);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
     }
 
 }

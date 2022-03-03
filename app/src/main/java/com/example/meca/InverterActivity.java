@@ -1,15 +1,15 @@
 package com.example.meca;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class MaintenanceActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
 
+// bien tan
+public class InverterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maintenance);
+        setContentView(R.layout.activity_tttb);
 
     }
 }
