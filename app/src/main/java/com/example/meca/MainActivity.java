@@ -172,15 +172,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         switch (item.getItemId()) {
-//            case R.id.search:
-//                Toast.makeText(this, "Search button selected", Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.about:
-//                Toast.makeText(this, "About button selected", Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.help:
-//                Toast.makeText(this, "Help button selected", Toast.LENGTH_SHORT).show();
-//                return true;
             case R.id.scan:
                 startActivity(new Intent(MainActivity.this, ScanActivity.class));
                 return true;

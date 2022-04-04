@@ -36,6 +36,7 @@ public class MaintainAdapter extends RecyclerView.Adapter<MaintainAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.textView.setText(listdata.get(position).get("content").toString());
+        holder.textView2.setText(listdata.get(position).get("date").toString());
     }
 
     @Override
@@ -46,11 +47,12 @@ public class MaintainAdapter extends RecyclerView.Adapter<MaintainAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 //        public ImageView imageView;
         public TextView textView;
+        public TextView textView2;
         public RelativeLayout relativeLayout;
         public ViewHolder(View itemView) {
             super(itemView);
-//            this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
-            this.textView = (TextView) itemView.findViewById(R.id.textView2);
+            this.textView = (TextView) itemView.findViewById(R.id.textView4);
+            this.textView2 = (TextView) itemView.findViewById(R.id.textView2);
             relativeLayout = (RelativeLayout)itemView.findViewById(R.id.relativeLayout2);
         }
     }

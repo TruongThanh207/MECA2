@@ -38,33 +38,26 @@ public class InfoDeviceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_device);
-//        tvtest =findViewById(R.id.textView4);
         device = (Devices) getIntent().getSerializableExtra("data");
-//        tvtest.setText(device.getName());
         getSupportActionBar().setTitle(device.getName());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Write a message to the database
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("message");
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
-//        myRef.setValue("Hello, World!");
-//
-//        Toast.makeText(InfoDeviceActivity.this, "device context", Toast.LENGTH_SHORT).show();
 
         btnVPdf = findViewById(R.id.buttonViewpdf);
         btnVPdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(InfoDeviceActivity.this, ViewpdfActivity.class));
-
+                Intent intent = new Intent(InfoDeviceActivity.this, ViewpdfActivity.class);
+                intent.putExtra("data", (Serializable) device);
+                startActivity(intent);
             }
         });
-        tvtest =findViewById(R.id.textView4);
+
         imageView =findViewById(R.id.theme);
         device = (Devices) getIntent().getSerializableExtra("data");
-        tvtest.setText(device.getName());
         imageView.setImageResource(device.getImgId());
 
         btnTtbt = findViewById(R.id.button);
