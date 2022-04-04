@@ -37,15 +37,7 @@ public class ScanActivity extends AppCompatActivity {
                 new Devices("PLC", R.drawable.plc),
                 new Devices("HMI", R.drawable.hmi),
                 new Devices("Inverter", android.R.drawable.ic_delete),
-                new Devices("Motor", android.R.drawable.ic_dialog_dialer),
-//                new Devices("Alert", android.R.drawable.ic_dialog_alert),
-//                new Devices("Map", android.R.drawable.ic_dialog_map),
-//                new Devices("Email", android.R.drawable.ic_dialog_email),
-//                new Devices("Info", android.R.drawable.ic_dialog_info),
-//                new Devices("Delete", android.R.drawable.ic_delete),
-//                new Devices("Dialer", android.R.drawable.ic_dialog_dialer),
-//                new Devices("Alert", android.R.drawable.ic_dialog_alert),
-//                new Devices("Map", android.R.drawable.ic_dialog_map),
+                new Devices("Motor", android.R.drawable.ic_dialog_dialer)
         };
         codeScanned(myListData);
     }
@@ -60,18 +52,6 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if(!result.getText().isEmpty()){
-//                            String root = "com.example.meca.";
-//                            String activity = root.concat(result.getText().concat("Activity"));
-//                            Intent intent = null;
-//                            try {
-//                                intent = new Intent(ScanActivity.this, Class.forName(activity));
-//                            } catch (ClassNotFoundException e) {
-//                                e.getException();
-//                            }
-//                            intent.putExtra("DATA", result.getText());
-//                            startActivity(intent);
-//                            finish();
-//   //                         startActivity(new Intent(ScanActivity.this, InfoDeviceActivity.class));
                             for(Devices num : myListData){
                                 if (num.getName().equals(result.getText())){
                                     Intent intent = new Intent(ScanActivity.this, InfoDeviceActivity.class);

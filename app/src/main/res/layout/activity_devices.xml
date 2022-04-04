@@ -8,16 +8,6 @@
         android:id="@+id/recyclerView"
         tools:context=".DevicesActivity">
 </androidx.recyclerview.widget.RecyclerView>
-    <!-- viewpdf-->
-<!--        <TextView-->
-<!--            android:id="@+id/textViewpdf"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="View PDF"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.498"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            tools:layout_editor_absoluteY="16dp" />-->
 
 
 

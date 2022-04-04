@@ -33,16 +33,8 @@ public class DevicesActivity extends AppCompatActivity {
         Devices[] myListData = new Devices[] {
                 new Devices("PLC", R.drawable.plc),
                 new Devices("HMI", R.drawable.hmi),
-                new Devices("Biến tần", android.R.drawable.ic_delete),
-                new Devices("Motor", android.R.drawable.ic_dialog_dialer),
-//                new Devices("Alert", android.R.drawable.ic_dialog_alert),
-//                new Devices("Map", android.R.drawable.ic_dialog_map),
-//                new Devices("Email", android.R.drawable.ic_dialog_email),
-//                new Devices("Info", android.R.drawable.ic_dialog_info),
-//                new Devices("Delete", android.R.drawable.ic_delete),
-//                new Devices("Dialer", android.R.drawable.ic_dialog_dialer),
-//                new Devices("Alert", android.R.drawable.ic_dialog_alert),
-//                new Devices("Map", android.R.drawable.ic_dialog_map),
+                new Devices("Invecter", android.R.drawable.ic_delete),
+                new Devices("Motor", android.R.drawable.ic_dialog_dialer)
         };
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         DeviceAdapter    adapter = new DeviceAdapter(myListData, DevicesActivity.this);
