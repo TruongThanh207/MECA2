@@ -34,10 +34,10 @@ public class ScanActivity extends AppCompatActivity {
         setPermission();
 
         Devices[] myListData = new Devices[] {
-                new Devices("Email", android.R.drawable.ic_dialog_email),
-                new Devices("Info", android.R.drawable.ic_dialog_info),
-                new Devices("Delete", android.R.drawable.ic_delete),
-                new Devices("Dialer", android.R.drawable.ic_dialog_dialer),
+                new Devices("PLC", R.drawable.plc),
+                new Devices("HMI", R.drawable.hmi),
+                new Devices("Inverter", android.R.drawable.ic_delete),
+                new Devices("Motor", android.R.drawable.ic_dialog_dialer),
 //                new Devices("Alert", android.R.drawable.ic_dialog_alert),
 //                new Devices("Map", android.R.drawable.ic_dialog_map),
 //                new Devices("Email", android.R.drawable.ic_dialog_email),
@@ -79,7 +79,7 @@ public class ScanActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     break;
                                 }
-                                
+
                             }
 
                         }else{

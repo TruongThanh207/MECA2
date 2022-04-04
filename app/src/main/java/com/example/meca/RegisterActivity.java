@@ -19,11 +19,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class RegisterActivity extends AppCompatActivity {
 
     Button btnRegister;
-    EditText tvEmail, tvPassword;
+    EditText tvEmail, tvPassword, edtName;
     TextView tvLogin;
 
     FirebaseAuth mAuth;
@@ -68,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
     private void anhxa(){
+        edtName = (EditText)findViewById(R.id.editTextName);
         tvLogin = (TextView) findViewById(R.id.textLogin);
         tvEmail = (EditText) findViewById(R.id.editTextEmailRegister);
         tvPassword = (EditText) findViewById(R.id.editTextPasswordRegister);
@@ -112,10 +114,29 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
 //                            updateUI(null);
+                            pd.dismiss();
                         }
                     }
                 });
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null) {
+            return;
+        }
+        String strName = edtName.getText().toString().trim();
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(strName)
+//                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                .build();
 
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+//                            Log.d(TAG, "User profile updated.");
+                        }
+                    }
+                });
 
     }
 }

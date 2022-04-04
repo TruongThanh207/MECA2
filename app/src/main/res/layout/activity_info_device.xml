@@ -14,7 +14,8 @@
         app:layout_constraintHorizontal_bias="0.417"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_avata_default"/>/>
 
     <Button
         android:id="@+id/button"
@@ -26,7 +27,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonViewpdf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
@@ -43,12 +44,12 @@
         app:layout_constraintTop_toBottomOf="@+id/button"
         tools:layout_editor_absoluteX="16dp" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="337dp" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="TextView"-->
+<!--        tools:layout_editor_absoluteX="219dp"-->
+<!--        tools:layout_editor_absoluteY="337dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,11 @@
         android:theme="@style/Theme.MECA">
         <activity
             android:name=".InfoDeviceActivity"
-            android:exported="false" />
+            android:exported="false">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.meca.DevicesActivity" />
+        </activity>
         <activity
             android:name=".ViewpdfActivity"
             android:exported="false" />
@@ -28,18 +32,6 @@
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HmiActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PlcActivity"
-            android:exported="false" />
-        <activity
-            android:name=".InverterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MotorActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

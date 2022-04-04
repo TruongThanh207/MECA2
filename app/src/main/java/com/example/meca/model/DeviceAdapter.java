@@ -13,10 +13,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meca.InfoDeviceActivity;
-import com.example.meca.LoginActivity;
-import com.example.meca.MainActivity;
 import com.example.meca.R;
-import com.example.meca.RegisterActivity;
 
 import java.io.Serializable;
 

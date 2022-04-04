@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.example.meca.model.Devices;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +35,8 @@ public class ViewpdfActivity extends AppCompatActivity {
     // creating a variable for our pdfview
     private PDFView pdfView;
 
+    private Devices device;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +49,10 @@ public class ViewpdfActivity extends AppCompatActivity {
         // of our Firebase database.
         firebaseDatabase = FirebaseDatabase.getInstance();
 
+        device = (Devices) getIntent().getSerializableExtra("data");
+
         // below line is used to get reference for our database.
-        databaseReference = firebaseDatabase.getReference("pdf");
+        databaseReference = firebaseDatabase.getReference(device.getName()); //"url"
 
         // calling method to initialize
         // our PDF view.

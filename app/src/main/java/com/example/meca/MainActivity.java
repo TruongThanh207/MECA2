@@ -2,6 +2,7 @@ package com.example.meca;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +20,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,9 +36,13 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private DatabaseReference mDatabase;
+    private ImageView imgAvata;
+    private TextView tvEmail,tvName;
     Switch btnPower, btnMotor;
     TextView tvDataLow,tvDataMedium,tvDataHigh;
     TextView tvHome,tvlogout,tvdevices;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        header();
+
         // update toolbar title
         // getSupportActionBar().setTitle(" ten tung phan");
 
@@ -71,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this, "Logout Successfull!", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
             }
         });
         tvdevices.setOnClickListener(new View.OnClickListener() {
@@ -220,5 +231,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private void header(){
+        imgAvata = findViewById(R.id.activity_main_imv_avatar);
+        tvName   = findViewById(R.id.activity_main_tv_user_name);
+        tvEmail  = findViewById(R.id.activity_main_tv_email);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return;
+        }
+        String name = user.getDisplayName();
+        String email = user.getEmail();
+        Uri photoUrl = user.getPhotoUrl();
+        //check name
+        if (name == null){
+            tvName.setVisibility(View.GONE); // hint
+        }else{
+            tvName.setVisibility(View.VISIBLE);
+            tvName.setText(name);
+        }
+        tvEmail.setText(email);
+        Glide.with(this).load(photoUrl).error(R.drawable.ic_avata_default).into(imgAvata);
+    };
 
 }
