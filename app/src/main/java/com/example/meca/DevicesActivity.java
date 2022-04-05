@@ -29,12 +29,13 @@ public class DevicesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_devices);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Danh sách thiết bị");
 
         Devices[] myListData = new Devices[] {
                 new Devices("PLC", R.drawable.plc),
                 new Devices("HMI", R.drawable.hmi),
-                new Devices("Invecter", android.R.drawable.ic_delete),
-                new Devices("Motor", android.R.drawable.ic_dialog_dialer)
+                new Devices("Inverter", R.drawable.inverter),
+                new Devices("Motor", R.drawable.motor)
         };
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         DeviceAdapter    adapter = new DeviceAdapter(myListData, DevicesActivity.this);
