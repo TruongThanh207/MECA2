@@ -15,11 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MECA">
         <activity
+            android:name=".AllListMaintainActivity"
+            android:exported="false" />
+        <activity
             android:name=".InfoDeviceActivity"
             android:exported="false">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.example.meca.DevicesActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.meca.DevicesActivity" />
         </activity>
         <activity
             android:name=".ViewpdfActivity"

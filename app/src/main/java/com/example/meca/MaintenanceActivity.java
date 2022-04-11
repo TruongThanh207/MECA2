@@ -77,15 +77,14 @@ public class MaintenanceActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.add:
-                item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        showCreateModalMaintain();
-                        return true;
-                    }
-                });
+        if (item.getItemId() == R.id.add) {
+            item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    showCreateModalMaintain();
+                    return true;
+                }
+            });
         }
         return super.onOptionsItemSelected(item);
     }

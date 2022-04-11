@@ -21,6 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
+import com.example.meca.model.Devices;
+import com.example.meca.service.DeviceService;
+import com.example.meca.service.DeviseData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +32,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvEmail,tvName;
     Switch btnPower, btnMotor;
     TextView tvDataLow,tvDataMedium,tvDataHigh;
-    TextView tvHome,tvlogout,tvdevices;
-
+    TextView tvHome,tvlogout,tvdevices, tvMaintain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +55,12 @@ public class MainActivity extends AppCompatActivity {
         tvHome = findViewById(R.id.home);
         tvlogout =findViewById(R.id.logoutacc);
         tvdevices = findViewById(R.id.devices);
+        tvMaintain = findViewById(R.id.maintenance);
 
         tvDataHigh = findViewById(R.id.tvCHigh);
         tvDataMedium = findViewById(R.id.tvCMedium);
         tvDataLow = findViewById(R.id.tvCLow);
+
         GetDatabase();
 
         drawerLayout = findViewById(R.id.activity_main_drawer);
@@ -66,9 +72,16 @@ public class MainActivity extends AppCompatActivity {
 
         header();
 
+        //maintain
         // update toolbar title
         // getSupportActionBar().setTitle(" ten tung phan");
 
+        tvMaintain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AllListMaintainActivity.class));
+            }
+        });
         tvHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,12 +150,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-//        btnmotoron.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mDatabase.child("Motor").child("Value").setValue("ON");
-//            }
-//        });
     }
 
     @Override
@@ -243,5 +250,4 @@ public class MainActivity extends AppCompatActivity {
         tvEmail.setText(email);
         Glide.with(this).load(photoUrl).error(R.drawable.ic_avata_default).into(imgAvata);
     };
-
 }
