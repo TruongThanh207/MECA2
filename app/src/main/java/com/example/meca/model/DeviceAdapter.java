@@ -42,9 +42,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                context.startActivity(new Intent(context, InfoDeviceActivity.class));
-//                Toast.makeText(view.getContext(),"click on item: "+myListData.getName(),Toast.LENGTH_LONG).show();
-                Toast.makeText(view.getContext(),listdata[position].getName(),Toast.LENGTH_LONG).show();
+//                Toast.makeText(view.getContext(),listdata[position].getName(),Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, InfoDeviceActivity.class);
                 intent.putExtra("data", (Serializable) listdata[position]);
                 context.startActivity(intent);

@@ -20,6 +20,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.meca.model.BasicInfoAdapter;
 import com.example.meca.model.Devices;
 import com.example.meca.model.MaintainAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,6 +48,8 @@ public class MaintenanceActivity extends AppCompatActivity {
         device = (Devices) getIntent().getSerializableExtra("data");
 
         getMaintainData();
+        getSupportActionBar().setTitle("Thông tin bảo trì "+device.getName());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void getMaintainData(){

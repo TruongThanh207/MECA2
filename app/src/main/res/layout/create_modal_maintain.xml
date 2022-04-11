@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="280dp"
+    android:layout_height="280dp">
 
     <EditText
         android:id="@+id/editTextDate"
@@ -22,7 +22,7 @@
     <Button
         android:id="@+id/buttonSubmit"
         android:layout_width="145dp"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:backgroundTint="#2196F3"
         android:text="Submit"
@@ -36,7 +36,7 @@
     <EditText
         android:id="@+id/editTextTextPersonName3"
         android:layout_width="264dp"
-        android:layout_height="177dp"
+        android:layout_height="110dp"
         android:ems="10"
         android:hint="content"
         android:inputType="textPersonName"
@@ -44,6 +44,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.315" />
+        app:layout_constraintVertical_bias="0.100000024" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

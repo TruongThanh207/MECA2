@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvEmail,tvName;
     Switch btnPower, btnMotor;
     TextView tvDataLow,tvDataMedium,tvDataHigh;
-    TextView tvHome,tvlogout,tvdevices, tvMaintain;
+    TextView tvHome,tvlogout,tvdevices, tvhotline, tvhelp, tvMaintain;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         tvlogout =findViewById(R.id.logoutacc);
         tvdevices = findViewById(R.id.devices);
         tvMaintain = findViewById(R.id.maintenance);
+        tvhotline = findViewById(R.id.phone);
+        tvhelp = findViewById(R.id.help);
 
         tvDataHigh = findViewById(R.id.tvCHigh);
         tvDataMedium = findViewById(R.id.tvCMedium);
@@ -97,12 +100,25 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+        tvhotline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Hưng\n 0977263230", Toast.LENGTH_LONG).show();
+            }
+        });
+        tvhelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Facebook: https://facebook.com/tvgnuh1999\n Zalo: 0977263230", Toast.LENGTH_LONG).show();
+            }
+        });
         tvdevices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, DevicesActivity.class));
             }
         });
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         btnPower = findViewById(R.id.power);
         btnMotor = findViewById(R.id.switchmotor);
@@ -119,9 +135,6 @@ public class MainActivity extends AppCompatActivity {
                         if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) btnMotor.setChecked(true);
                         else btnMotor.setChecked(false);
                     }
-                    //  if ("XYZ".equals(Objects.requireNonNull(m.getKey()))) {
-                    //      if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) btnXYZ.setChecked(true);
-                    //  }
                 });
             }
             @Override
