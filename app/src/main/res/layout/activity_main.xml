@@ -69,37 +69,24 @@
             android:id="@+id/switchmotor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:rotation="90"
             android:showText="true"
             android:textOff="OFF"
             android:textOn="ON"
-            android:rotation="90"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.525"
+            app:layout_constraintHorizontal_bias="0.096"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.913"
+            app:layout_constraintVertical_bias="0.262"
             tools:checked="false"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <TextView
-            android:id="@+id/CountHigh"
-            android:layout_width="wrap_content"
-            android:layout_height="19dp"
-            android:rotation="90"
-            android:text="Count High"
-            app:layout_constraintBottom_toTopOf="@+id/CountMedium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.97"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.698" />
-
-        <TextView
             android:id="@+id/CountMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="76dp"
+            android:layout_width="80dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="82dp"
             android:rotation="90"
             android:text="Count Medium"
             app:layout_constraintBottom_toTopOf="@+id/CountLow"
@@ -108,50 +95,72 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/CountHigh"
+            android:layout_width="80dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="68dp"
+            android:rotation="90"
+            android:text="Count High"
+            app:layout_constraintBottom_toTopOf="@+id/CountMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
             android:id="@+id/CountLow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="316dp"
+            android:layout_width="80dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="230dp"
             android:rotation="90"
             android:text="Count Low"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tvCLow"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="316dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="15dp"
             android:rotation="90"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="11"
+            android:gravity="bottom"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.86"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CountLow" />
 
         <TextView
             android:id="@+id/tvCMedium"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="76dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="15dp"
             android:rotation="90"
-            app:layout_constraintBottom_toTopOf="@+id/tvCLow"
+            android:text="12"
+            android:gravity="left"
             app:layout_constraintEnd_toEndOf="@+id/CountMedium"
-            app:layout_constraintHorizontal_bias="0.86"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CountMedium" />
 
         <TextView
             android:id="@+id/tvCHigh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="15dp"
             android:rotation="90"
-            app:layout_constraintBottom_toTopOf="@+id/tvCMedium"
+            android:text="13"
+            android:gravity="right"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.863"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.697" />
+            app:layout_constraintTop_toBottomOf="@+id/CountHigh" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -196,27 +205,39 @@
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:rotation="90"
+            android:rotation="180"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.262"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.499"
+            app:layout_constraintVertical_bias="0.622"
             app:srcCompat="@drawable/stepping_motor" />
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:rotation="-90"
+            android:rotation="180"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.642"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.677"
+            app:layout_constraintVertical_bias="0.622"
             app:srcCompat="@drawable/stepping_motor" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.262"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.247"
+            app:srcCompat="@drawable/motor_conveyor" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!-- Left Menu -->

@@ -22,11 +22,26 @@
             android:value="com.example.meca.DevicesActivity" />
         </activity>
         <activity
+            android:name=".BasicInfoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.meca.DevicesActivity" />
+        </activity>
+        <activity
             android:name=".ViewpdfActivity"
-            android:exported="false" />
+            android:exported="false" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.meca.DevicesActivity" />
+        </activity>
         <activity
             android:name=".MaintenanceActivity"
-            android:exported="false" />
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.meca.DevicesActivity" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="false" />

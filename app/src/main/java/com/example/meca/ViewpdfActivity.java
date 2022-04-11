@@ -50,6 +50,9 @@ public class ViewpdfActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         device = (Devices) getIntent().getSerializableExtra("data");
+        String titlee = "Datasheet " + device.getName().toLowerCase();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(titlee);
 
         // below line is used to get reference for our database.
         databaseReference = firebaseDatabase.getReference(device.getName()); //"url"

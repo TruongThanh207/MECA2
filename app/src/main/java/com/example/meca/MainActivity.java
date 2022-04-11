@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvEmail,tvName;
     Switch btnPower, btnMotor;
     TextView tvDataLow,tvDataMedium,tvDataHigh;
-    TextView tvHome,tvlogout,tvdevices, tvhotline, tvhelp;
+    TextView tvHome,tvlogout,tvdevices, tvhotline, tvhelp, tvmaintenace;
 
 
     @Override
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         tvHome = findViewById(R.id.home);
         tvlogout =findViewById(R.id.logoutacc);
         tvdevices = findViewById(R.id.devices);
+        tvmaintenace = findViewById(R.id.maintenance);
         tvhotline = findViewById(R.id.phone);
         tvhelp = findViewById(R.id.help);
 
@@ -104,6 +105,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, DevicesActivity.class));
             }
         });
+//        tvmaintenace.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(MainActivity.this, MaintenanceActivity.class));
+//            }
+//        });
         mDatabase = FirebaseDatabase.getInstance().getReference();
         btnPower = findViewById(R.id.power);
         btnMotor = findViewById(R.id.switchmotor);
@@ -120,9 +127,6 @@ public class MainActivity extends AppCompatActivity {
                         if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) btnMotor.setChecked(true);
                         else btnMotor.setChecked(false);
                     }
-                    //  if ("XYZ".equals(Objects.requireNonNull(m.getKey()))) {
-                    //      if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) btnXYZ.setChecked(true);
-                    //  }
                 });
             }
             @Override

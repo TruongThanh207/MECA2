@@ -27,12 +27,11 @@ import java.io.Serializable;
 import java.util.Locale;
 
 public class InfoDeviceActivity extends AppCompatActivity {
-//    private TextView tvtest;
     private Devices device;
     private DatabaseReference mDatabase;
     Button btnVPdf;
     private ImageView imageView;
-    private Button btnTtbt;
+    private Button btnTtbt, btnTtcb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +64,15 @@ public class InfoDeviceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(InfoDeviceActivity.this, MaintenanceActivity.class);
+                intent.putExtra("data", (Serializable) device);
+                startActivity(intent);
+            }
+        });
+        btnTtcb = findViewById(R.id.buttonTtcb);
+        btnTtcb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InfoDeviceActivity.this, BasicInfoActivity.class);
                 intent.putExtra("data", (Serializable) device);
                 startActivity(intent);
             }
