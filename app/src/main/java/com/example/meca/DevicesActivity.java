@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.meca.model.DeviceAdapter;
 import com.example.meca.model.Devices;
+import com.example.meca.service.DeviceService;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,17 +32,8 @@ public class DevicesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Danh sách thiết bị");
 
-        Devices[] myListData = new Devices[] {
-                new Devices("PLC", R.drawable.plc),
-                new Devices("HMI", R.drawable.hmi),
-                new Devices("Inverter", R.drawable.inverter),
-                new Devices("Motor conveyor", R.drawable.motor),
-                new Devices("Motor high", R.drawable.motor_br),
-                new Devices("Motor medium", R.drawable.motor_br),
-                new Devices("Senser low", R.drawable.senser_br),
-                new Devices("Senser medium", R.drawable.senser_br),
-                new Devices("Senser high", R.drawable.senser_br),
-        };
+        Devices[] myListData = (new DeviceService()).getDataDocument().toArray(new Devices[0]);
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         DeviceAdapter    adapter = new DeviceAdapter(myListData, DevicesActivity.this);
         recyclerView.setHasFixedSize(true);

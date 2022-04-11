@@ -16,7 +16,11 @@
         android:theme="@style/Theme.MECA">
         <activity
             android:name=".AllListMaintainActivity"
-            android:exported="false" />
+            android:exported="false" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.meca.DevicesActivity" />
+        </activity>
         <activity
             android:name=".InfoDeviceActivity"
             android:exported="false">

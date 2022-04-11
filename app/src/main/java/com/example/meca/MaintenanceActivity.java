@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -38,21 +39,28 @@ import java.util.List;
 import java.util.Map;
 
 public class MaintenanceActivity extends AppCompatActivity {
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
     Devices device;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<Map<String, Object>> mapdata;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintenance);
         device = (Devices) getIntent().getSerializableExtra("data");
 
+        drawerLayout = findViewById(R.id.activity_maintain_drawer);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(drawerToggle);
+
         getMaintainData();
-        getSupportActionBar().setTitle("Thông tin bảo trì "+device.getName());
+        getSupportActionBar().setTitle("Thông tin bảo trì " + device.getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void getMaintainData(){
+    public void getMaintainData() {
         mapdata = new ArrayList<>();
         String url = "ttbt/" + device.getName().toLowerCase() + "/data";
         Log.d(TAG, "url  " + url);
@@ -64,7 +72,8 @@ public class MaintenanceActivity extends AppCompatActivity {
                         mapdata.add(document.getData());
                     }
                     setRecycleView(mapdata);
-                } else { Log.w(TAG, "Error getting documents.", task.getException());
+                } else {
+                    Log.w(TAG, "Error getting documents.", task.getException());
                 }
             }
         });
@@ -79,7 +88,32 @@ public class MaintenanceActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.maintain_actions, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
         if (item.getItemId() == R.id.add) {
             item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
@@ -121,10 +155,10 @@ public class MaintenanceActivity extends AppCompatActivity {
     }
 
     void createMaintainData(String content, String date) {
-       Map<String, Object> data = new HashMap<>();
-       data.put("content", content);
-       data.put("date", date);
-       db.collection("/ttbt/"+ device.getName().toLowerCase() + "/data")
+        Map<String, Object> data = new HashMap<>();
+        data.put("content", content);
+        data.put("date", date);
+        db.collection("/ttbt/" + device.getName().toLowerCase() + "/data")
                 .add(data)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -140,12 +174,5 @@ public class MaintenanceActivity extends AppCompatActivity {
                     }
                 });
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.maintain_actions, menu);
-
-        return super.onCreateOptionsMenu(menu);
     }
 }

@@ -20,6 +20,7 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.meca.model.Devices;
+import com.example.meca.service.DeviceService;
 import com.google.zxing.Result;
 
 import java.io.Serializable;
@@ -33,17 +34,8 @@ public class ScanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scan);
         setPermission();
 
-        Devices[] myListData = new Devices[] {
-                new Devices("PLC", R.drawable.plc),
-                new Devices("HMI", R.drawable.hmi),
-                new Devices("Inverter", R.drawable.inverter),
-                new Devices("Motor conveyor", R.drawable.motor),
-                new Devices("Motor high", R.drawable.motor_br),
-                new Devices("Motor medium", R.drawable.motor_br),
-                new Devices("Senser low", R.drawable.senser_br),
-                new Devices("Senser medium", R.drawable.senser_br),
-                new Devices("Senser high", R.drawable.senser_br),
-        };
+        Devices[] myListData = (new DeviceService()).getDataDocument().toArray(new Devices[0]);
+
         codeScanned(myListData);
     }
 
@@ -64,9 +56,7 @@ public class ScanActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     break;
                                 }
-
                             }
-
                         }else{
                             Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
                         }

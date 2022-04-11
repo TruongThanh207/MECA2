@@ -37,6 +37,10 @@ public class AllListMaintainActivity extends AppCompatActivity implements Devise
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setTitle("Danh Sách Bảo Trì");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_all_list_maintain);
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
         getDocumentID();
@@ -104,25 +108,6 @@ public class AllListMaintainActivity extends AppCompatActivity implements Devise
                                                     documents.get(groupPosition) + " Collapsed",
                                                     Toast.LENGTH_SHORT).show();
 
-                                        }
-                                    });
-
-                                    // Listview on child click listener
-                                    expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-                                        @Override
-                                        public boolean onChildClick(ExpandableListView parent, View v,
-                                                                    int groupPosition, int childPosition, long id) {
-                                            // TODO Auto-generated method stub
-                                            Toast.makeText(
-                                                    getApplicationContext(),
-                                                    documents.get(groupPosition)
-                                                            + " : "
-                                                            + listDataChild.get(
-                                                            documents.get(groupPosition)).get(
-                                                            childPosition), Toast.LENGTH_SHORT)
-                                                    .show();
-                                            return false;
                                         }
                                     });
                                 }
