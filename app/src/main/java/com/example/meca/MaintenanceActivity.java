@@ -9,16 +9,20 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.meca.model.BasicInfoAdapter;
@@ -34,6 +38,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,9 +46,14 @@ import java.util.Map;
 public class MaintenanceActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
+    EditText date;
     Devices device;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<Map<String, Object>> mapdata;
+
+    private int lastSelectedYear;
+    private int lastSelectedMonth;
+    private int lastSelectedDayOfMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,9 +147,11 @@ public class MaintenanceActivity extends AppCompatActivity {
 
         //Initializing the views of the dialog.
         final EditText content = dialog.findViewById(R.id.editTextTextPersonName3);
-        final EditText date = dialog.findViewById(R.id.editTextDate);
+        date = dialog.findViewById(R.id.editTextDate);
+        final Button btnSelectDate = dialog.findViewById(R.id.btnSelectDate);
         Button submitButton = dialog.findViewById(R.id.buttonSubmit);
 
+        formatDate(btnSelectDate);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +164,42 @@ public class MaintenanceActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    void formatDate(Button btnSelectDate){
+        btnSelectDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDate(btnSelectDate);
+            }
+        });
+
+        final Calendar c = Calendar.getInstance();
+        this.lastSelectedYear = c.get(Calendar.YEAR);
+        this.lastSelectedMonth = c.get(Calendar.MONTH);
+        this.lastSelectedDayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+    }
+
+    void selectDate(Button btnSelectDate){
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year,
+                                  int monthOfYear, int dayOfMonth) {
+
+                date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+                lastSelectedYear = year;
+                lastSelectedMonth = monthOfYear;
+                lastSelectedDayOfMonth = dayOfMonth;
+            }
+        };
+
+        DatePickerDialog datePickerDialog = null;
+
+        datePickerDialog = new DatePickerDialog(this, dateSetListener, lastSelectedYear, lastSelectedMonth, lastSelectedDayOfMonth);
+        // Show
+        datePickerDialog.show();
     }
 
     void createMaintainData(String content, String date) {

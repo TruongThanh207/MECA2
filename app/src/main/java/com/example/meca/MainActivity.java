@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -46,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
     Switch btnPower, btnMotor;
     TextView tvDataLow,tvDataMedium,tvDataHigh;
     TextView tvHome,tvlogout,tvdevices, tvhotline, tvhelp, tvMaintain;
-
+    ImageView img_moto_conveyor, img_conveyor;
+    ImageView img_motorH, img_motorM;
+    ImageView img_sensorL, img_sensorM, img_sensorH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
         tvDataHigh = findViewById(R.id.tvCHigh);
         tvDataMedium = findViewById(R.id.tvCMedium);
         tvDataLow = findViewById(R.id.tvCLow);
+
+        img_moto_conveyor = findViewById(R.id.img_moto_conveyor);
+        img_conveyor = findViewById(R.id.img_conveyor);
+        img_motorH = findViewById(R.id.imageMotorR);
+        img_motorM = findViewById(R.id.imageMotorL);
+        img_sensorL = findViewById(R.id.imageSensorL);
+        img_sensorM = findViewById(R.id.imageSensorM);
+        img_sensorH = findViewById(R.id.imageSensorH);
 
         GetDatabase();
 
@@ -132,9 +143,50 @@ public class MainActivity extends AppCompatActivity {
                         else btnPower.setChecked(false);
                     }
                     if ("Motor".equals(Objects.requireNonNull(m.getKey()))) {
-                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) btnMotor.setChecked(true);
-                        else btnMotor.setChecked(false);
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
+                            btnMotor.setChecked(true);
+                            img_moto_conveyor.setImageResource(R.drawable.motor_conveyor_on);
+                            img_conveyor.setImageResource(R.drawable.conveyor_on);
+                        }
+                        else {
+                            btnMotor.setChecked(false);
+                            img_moto_conveyor.setImageResource(R.drawable.motor_conveyor);
+                            img_conveyor.setImageResource(R.drawable.conveyor);
+                        }
                     }
+                    if ("Motor High Forward".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
+                            img_motorH.setImageResource(R.drawable.stepping_motor_fwd);
+                        }
+                    }
+                    if ("Motor High Reverse".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
+                            img_motorH.setImageResource(R.drawable.stepping_motor_rev);
+                        }
+                    }
+                    String motor_med_fwd = null, motor_med_rev = null;
+                    if ("Motor Med Forward".equals(Objects.requireNonNull(m.getKey()))) {
+                        motor_med_fwd = m.child("Value").getValue().toString();
+                    }
+                    if ("Motor Med Reverse".equals(Objects.requireNonNull(m.getKey())) || "Motor Med Forward".equals(Objects.requireNonNull(m.getKey()))) {
+                        motor_med_rev = m.child("Value").getValue().toString();
+                        motor_med_fwd = m.child("Value").getValue().toString();
+                        if (motor_med_fwd == "OFF" && motor_med_rev == "OFF"){
+                            img_motorM.setImageResource(R.drawable.stepping_motor);
+                        }else if (motor_med_fwd == "ON") {
+                            img_motorM.setImageResource(R.drawable.stepping_motor_fwd);
+                        }else img_motorM.setImageResource(R.drawable.stepping_motor_rev);
+                        Toast.makeText(MainActivity.this, motor_med_fwd + motor_med_rev, Toast.LENGTH_LONG).show();
+                    }
+//                    if ("Motor Med Reverse".equals(Objects.requireNonNull(m.getKey()))) {
+//                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
+//                            Toast.makeText(MainActivity.this, "ascd", Toast.LENGTH_LONG).show();
+//                            img_motorM.setImageResource(R.drawable.stepping_motor_rev);
+//                        }
+////                        else
+////                            img_motorM.setImageResource(R.drawable.stepping_motor);
+//                    }
+
                 });
             }
             @Override
