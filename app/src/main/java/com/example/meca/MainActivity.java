@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView img_moto_conveyor, img_conveyor;
     ImageView img_motorH, img_motorM;
     ImageView img_sensorL, img_sensorM, img_sensorH;
+    int flag = 0;
+    String motor_med_fwd = "OFF", motor_med_rev = "OFF";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,30 +166,36 @@ public class MainActivity extends AppCompatActivity {
                             img_motorH.setImageResource(R.drawable.stepping_motor_rev);
                         }
                     }
-                    String motor_med_fwd = null, motor_med_rev = null;
-                    if ("Motor Med Forward".equals(Objects.requireNonNull(m.getKey()))) {
-                        motor_med_fwd = m.child("Value").getValue().toString();
-                    }
-                    if ("Motor Med Reverse".equals(Objects.requireNonNull(m.getKey())) || "Motor Med Forward".equals(Objects.requireNonNull(m.getKey()))) {
-                        motor_med_rev = m.child("Value").getValue().toString();
-                        motor_med_fwd = m.child("Value").getValue().toString();
-                        if (motor_med_fwd == "OFF" && motor_med_rev == "OFF"){
-                            img_motorM.setImageResource(R.drawable.stepping_motor);
-                        }else if (motor_med_fwd == "ON") {
-                            img_motorM.setImageResource(R.drawable.stepping_motor_fwd);
-                        }else img_motorM.setImageResource(R.drawable.stepping_motor_rev);
-                        Toast.makeText(MainActivity.this, motor_med_fwd + motor_med_rev, Toast.LENGTH_LONG).show();
-                    }
-//                    if ("Motor Med Reverse".equals(Objects.requireNonNull(m.getKey()))) {
-//                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
-//                            Toast.makeText(MainActivity.this, "ascd", Toast.LENGTH_LONG).show();
-//                            img_motorM.setImageResource(R.drawable.stepping_motor_rev);
-//                        }
-////                        else
-////                            img_motorM.setImageResource(R.drawable.stepping_motor);
-//                    }
 
+                    if ("Motor Med Forward".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
+                            motor_med_fwd = "ON";
+                        }
+                        else {
+                            motor_med_fwd = "OFF";
+                        }
+                    }
+                    if ("Motor Med Reverse".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")){
+                            motor_med_rev = "ON";
+                        }
+                        else {
+                            motor_med_rev = "OFF";
+                        }
+                    }
                 });
+                if (motor_med_rev.equals("OFF") && motor_med_fwd.equals("OFF")){
+                    img_motorM.setImageResource(R.drawable.stepping_motor);
+                }
+                if (motor_med_rev.equals("ON") && motor_med_fwd.equals("OFF")){
+                    img_motorM.setImageResource(R.drawable.stepping_motor_rev);
+                }
+                if (motor_med_rev.equals("OFF") && motor_med_fwd.equals("ON")){
+                    img_motorM.setImageResource(R.drawable.stepping_motor_fwd);
+                }
+                if (motor_med_rev.equals("ON") && motor_med_fwd.equals("ON")){
+                    Toast.makeText(MainActivity.this, "Data Conflict!!", Toast.LENGTH_LONG).show();
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
