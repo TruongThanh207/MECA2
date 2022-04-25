@@ -1,16 +1,19 @@
 package com.example.meca;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageSwitcher;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -22,9 +25,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
-import com.example.meca.model.Devices;
-import com.example.meca.service.DeviceService;
-import com.example.meca.service.DeviseData;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,8 +37,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,12 +48,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvEmail,tvName;
     Switch btnPower, btnMotor;
     TextView tvDataLow,tvDataMedium,tvDataHigh;
-    TextView tvHome,tvlogout,tvdevices, tvhotline, tvhelp, tvMaintain;
+    TextView tvHome,tvlogout,tvdevices, tvhotline, tvhelp, tvMaintain, tvdiagram, tvresetpass;
     ImageView img_moto_conveyor, img_conveyor;
     ImageView img_motorH, img_motorM;
     ImageView img_sensorL, img_sensorM, img_sensorH;
     int flag = 0;
     String motor_med_fwd = "OFF", motor_med_rev = "OFF";
+    String motor_high_fwd = "OFF", motor_high_rev = "OFF";
+    
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
         tvHome = findViewById(R.id.home);
         tvlogout =findViewById(R.id.logoutacc);
+        tvresetpass=findViewById(R.id.resetpass);
         tvdevices = findViewById(R.id.devices);
         tvMaintain = findViewById(R.id.maintenance);
         tvhotline = findViewById(R.id.phone);
         tvhelp = findViewById(R.id.help);
+        tvdiagram = findViewById(R.id.diagram);
 
         tvDataHigh = findViewById(R.id.tvCHigh);
         tvDataMedium = findViewById(R.id.tvCMedium);
@@ -131,6 +138,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, DevicesActivity.class));
             }
         });
+        tvdiagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "comming soon", Toast.LENGTH_SHORT).show();
+            }
+        });
+        pd = new ProgressDialog(this);
+        tvresetpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               pd.setMessage("Changing Password");
+               showChangePasswordDialog();
+            }
+        });
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         btnPower = findViewById(R.id.power);
@@ -156,17 +177,6 @@ public class MainActivity extends AppCompatActivity {
                             img_conveyor.setImageResource(R.drawable.conveyor);
                         }
                     }
-                    if ("Motor High Forward".equals(Objects.requireNonNull(m.getKey()))) {
-                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
-                            img_motorH.setImageResource(R.drawable.stepping_motor_fwd);
-                        }
-                    }
-                    if ("Motor High Reverse".equals(Objects.requireNonNull(m.getKey()))) {
-                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
-                            img_motorH.setImageResource(R.drawable.stepping_motor_rev);
-                        }
-                    }
-
                     if ("Motor Med Forward".equals(Objects.requireNonNull(m.getKey()))) {
                         if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
                             motor_med_fwd = "ON";
@@ -183,7 +193,36 @@ public class MainActivity extends AppCompatActivity {
                             motor_med_rev = "OFF";
                         }
                     }
+
+                    if ("Motor High Forward".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
+                            motor_high_fwd = "ON";
+                        }
+                        else {
+                            motor_high_fwd = "OFF";
+                        }
+                    }
+                    if ("Motor High Reverse".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")){
+                            motor_high_rev = "ON";
+                        }
+                        else {
+                            motor_high_rev = "OFF";
+                        }
+                    }
                 });
+                if (motor_high_rev.equals("OFF") && motor_high_fwd.equals("OFF")){
+                    img_motorH.setImageResource(R.drawable.stepping_motor);
+                }
+                if (motor_med_rev.equals("ON") && motor_high_fwd.equals("OFF")){
+                    img_motorH.setImageResource(R.drawable.stepping_motor_rev);
+                }
+                if (motor_high_rev.equals("OFF") && motor_high_fwd.equals("ON")){
+                    img_motorH.setImageResource(R.drawable.stepping_motor_fwd);
+                }
+                if (motor_high_rev.equals("ON") && motor_high_fwd.equals("ON")){
+                    Toast.makeText(MainActivity.this, "Data Conflict!!", Toast.LENGTH_LONG).show();
+                }
                 if (motor_med_rev.equals("OFF") && motor_med_fwd.equals("OFF")){
                     img_motorM.setImageResource(R.drawable.stepping_motor);
                 }
@@ -323,4 +362,69 @@ public class MainActivity extends AppCompatActivity {
         tvEmail.setText(email);
         Glide.with(this).load(photoUrl).error(R.drawable.ic_avata_default).into(imgAvata);
     };
+    private void showChangePasswordDialog(){
+        View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_change_password,null);
+        final EditText oldpasswordedt = view.findViewById(R.id.password_old_edt);
+        final EditText newpasswordedt = view.findViewById(R.id.password_change_edt);
+        Button updatepassWordbtn = view.findViewById(R.id.updatePassword);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setView(view);
+
+        final AlertDialog dialog =builder.create();
+        builder.create().show();
+
+        updatepassWordbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oldpassword = oldpasswordedt.getText().toString().trim();
+                String newpassword = newpasswordedt.getText().toString().trim();
+                if (TextUtils.isEmpty(oldpassword)){
+                    Toast.makeText(MainActivity.this,"Nhập mật khẩu hiện tại ",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (newpassword.length()<6){
+                    Toast.makeText(MainActivity.this,"Nhập mật khẩu mới có ít nhất 6 kí tự ",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                dialog.dismiss();
+                updatePassword(oldpassword,newpassword);
+            }
+        });
+    }
+
+    private void updatePassword(String oldpassword, String newpassword) {
+        pd.show();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        AuthCredential authCredential = EmailAuthProvider.getCredential(user.getEmail(),oldpassword);
+        user.reauthenticate(authCredential)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        user.updatePassword(newpassword)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        pd.dismiss();
+                                        Toast.makeText(MainActivity.this,"Password Updated...",Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        pd.dismiss();
+                                        Toast.makeText(MainActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        pd.dismiss();
+                        Toast.makeText(MainActivity.this,"Mật khẩu hiện tại không đúng",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 }
