@@ -1,46 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
     tools:context=".LoginActivity">
 
-
-
-
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="64dp"
-        android:backgroundTint="@color/teal_700"
-        android:text="Login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Passwordview" />
-
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="12dp"
-        android:text="Don't have account?"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
-
-    <TextView
-        android:id="@+id/textSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:text="Sign In"
+        android:layout_marginTop="50dp"
+        android:text="Đăng nhập"
+        android:textAlignment="center"
         android:textColor="#3F51B5"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/EmailAddressview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editTextEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:hint="Tài khoản Email "
+            android:inputType="textEmailAddress"
+            android:orientation="vertical"
+            android:text="tvhung@gmail.com" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Passwordview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:passwordToggleEnabled="true"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="188dp"
+            android:hint="Mật khẩu "
+            android:inputType="textPassword"
+            android:text="123456"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textForgotPassword"
@@ -48,67 +68,34 @@
         android:layout_height="wrap_content"
         android:text="Forgot password"
         android:textColor="#3F51B5"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.786"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Passwordview" />
+        android:layout_marginTop="16dp"/>
 
-    <TextView
-        android:id="@+id/textView3"
+    <Button
+        android:id="@+id/buttonLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:freezesText="false"
-        android:text="Đăng nhập"
-        android:textColor="#3F51B5"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/EmailAddressview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/Passwordview"
-        android:layout_width="match_parent"
+        android:backgroundTint="@color/teal_700"
+        android:text="Login"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        app:passwordToggleEnabled="true"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginTop="12dp"
+        android:text="Don't have account?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+<!--        android:layout_marginStart="200dp"         android:layout_marginStart="8dp"-->
 
-        <EditText
-            android:id="@+id/editTextPassword"
-            android:layout_width="282dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="24dp"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:text="123456">
-        </EditText>
+    <TextView
+        android:id="@+id/textSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Sign In"
+        android:textColor="#3F51B5"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/EmailAddressview"
-        android:layout_width="282dp"
-        android:layout_height="52dp"
-        android:layout_centerVertical="true"
-        android:orientation="vertical"
-        android:layout_marginTop="200dp"
-        tools:ignore="MissingConstraints">
-        <EditText
-            android:id="@+id/editTextEmailAddress"
-
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:text="tvhung@gmail.com"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
