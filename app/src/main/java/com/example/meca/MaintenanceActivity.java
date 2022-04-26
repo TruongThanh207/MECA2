@@ -13,6 +13,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -39,9 +40,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 
 public class MaintenanceActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -50,6 +53,7 @@ public class MaintenanceActivity extends AppCompatActivity {
     Devices device;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<Map<String, Object>> mapdata;
+    String url;
 
     private int lastSelectedYear;
     private int lastSelectedMonth;
@@ -72,16 +76,22 @@ public class MaintenanceActivity extends AppCompatActivity {
 
     public void getMaintainData() {
         mapdata = new ArrayList<>();
-        String url = "ttbt/" + device.getName().toLowerCase() + "/data";
+        url = "ttbt/" + device.getName().toLowerCase() + "/data";
         Log.d(TAG, "url  " + url);
         db.collection(url).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        mapdata.add(document.getData());
+                        Map <String , Object > deviceData = document.getData();
+                        Map <String , Object > objectId = new HashMap<>();
+                        objectId.put("id", document.getId());
+//                        int value = (int) deviceData.merge("id", document.getId(), null);
+                        deviceData.putAll(objectId);
+                        mapdata.add(deviceData);
                     }
-                    setRecycleView(mapdata);
+                    List<Map<String, Object>> data = sort(mapdata);
+                    setRecycleView(data, url);
                 } else {
                     Log.w(TAG, "Error getting documents.", task.getException());
                 }
@@ -89,9 +99,27 @@ public class MaintenanceActivity extends AppCompatActivity {
         });
     }
 
-    private void setRecycleView(List<Map<String, Object>> mapdata) {
+    public List<Map<String, Object>> sort(List<Map<String, Object>> data)
+    {
+        for(int i = 0; i < data.size() - 1; i++)
+        {
+            for (int j = i+1; j< data.size(); j++){
+                long time1 = new Date((String) data.get(i).get("date")).getTime();
+                long time2 = new Date((String) data.get(j).get("date")).getTime();
+
+                if (time1 < time2){
+                    Map<String, Object> tmp = data.get(i);
+                    data.set(i, data.get(j));
+                    data.set(j, tmp);
+                }
+            }
+        }
+        return data;
+    }
+
+    private void setRecycleView(List<Map<String, Object>> mapdata, String _url) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView2);
-        MaintainAdapter adapter = new MaintainAdapter(mapdata, MaintenanceActivity.this);
+        MaintainAdapter adapter = new MaintainAdapter(mapdata, MaintenanceActivity.this, _url);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(MaintenanceActivity.this));
         recyclerView.setAdapter(adapter);

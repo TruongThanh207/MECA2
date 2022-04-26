@@ -53,11 +53,13 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
+            android:label=""
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
