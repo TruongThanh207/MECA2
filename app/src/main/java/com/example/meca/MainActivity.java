@@ -1,5 +1,7 @@
 package com.example.meca;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,6 +9,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -83,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         img_sensorL = findViewById(R.id.imageSensorL);
         img_sensorM = findViewById(R.id.imageSensorM);
         img_sensorH = findViewById(R.id.imageSensorH);
+
+        String nameUser = getIntent().getStringExtra("nameUser");
 
         GetDatabase();
 
@@ -352,6 +357,7 @@ public class MainActivity extends AppCompatActivity {
         String name = user.getDisplayName();
         String email = user.getEmail();
         Uri photoUrl = user.getPhotoUrl();
+
         //check name
         if (name == null){
             tvName.setVisibility(View.GONE); // hint

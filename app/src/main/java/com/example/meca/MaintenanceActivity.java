@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -38,12 +39,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.SortedMap;
 
 public class MaintenanceActivity extends AppCompatActivity {
@@ -91,6 +95,9 @@ public class MaintenanceActivity extends AppCompatActivity {
                         mapdata.add(deviceData);
                     }
                     List<Map<String, Object>> data = sort(mapdata);
+                    for (int i = 0; i < data.size(); i++) {
+                        Log.d(TAG, "date " + i + " " + new Date(data.get(i).get("date").toString()).getTime());
+                    }
                     setRecycleView(data, url);
                 } else {
                     Log.w(TAG, "Error getting documents.", task.getException());
@@ -103,7 +110,7 @@ public class MaintenanceActivity extends AppCompatActivity {
     {
         for(int i = 0; i < data.size() - 1; i++)
         {
-            for (int j = i+1; j< data.size(); j++){
+            for (int j = i+1; j < data.size(); j++){
                 long time1 = new Date((String) data.get(i).get("date")).getTime();
                 long time2 = new Date((String) data.get(j).get("date")).getTime();
 
@@ -211,11 +218,12 @@ public class MaintenanceActivity extends AppCompatActivity {
     void selectDate(Button btnSelectDate){
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDateSet(DatePicker view, int year,
                                   int monthOfYear, int dayOfMonth) {
 
-                date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                date.setText((monthOfYear + 1) + "/" + dayOfMonth + "/" + year);
 
                 lastSelectedYear = year;
                 lastSelectedMonth = monthOfYear;

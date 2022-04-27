@@ -1,5 +1,7 @@
 package com.example.meca;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -94,11 +96,28 @@ public class RegisterActivity extends AppCompatActivity {
 //        });
         String email = tvEmail.getText().toString();
         String pass  = tvPassword.getText().toString();
+        String strName = edtName.getText().toString().trim();
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(strName)
+//                                  .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                                    .build();
+
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+//                            Log.d(TAG, "User profile updated.");
+                                            }
+                                        }
+                                    });
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "createUserWithEmail:success");
 //                            FirebaseUser user = mAuth.getCurrentUser();
@@ -106,7 +125,9 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this, "Successful!", Toast.LENGTH_SHORT).show();
 //                            Log.d("adsad", user.getEmail());
                             pd.dismiss();
-                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            intent.putExtra("nameUser", strName);
+                            startActivity(intent);
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -118,25 +139,5 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user==null) {
-            return;
-        }
-        String strName = edtName.getText().toString().trim();
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(strName)
-//                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-                .build();
-
-        user.updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-//                            Log.d(TAG, "User profile updated.");
-                        }
-                    }
-                });
-
     }
 }
