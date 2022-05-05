@@ -31,6 +31,7 @@ public class AllListMaintainActivity extends AppCompatActivity implements Devise
     ExpandableListView expListView;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<String> documents = new ArrayList<String>();
+    DeviceService ds = new DeviceService();
     HashMap<String, List<Maintain>> listDataChild = new HashMap<String, List<Maintain>>();
 
 
@@ -62,7 +63,7 @@ public class AllListMaintainActivity extends AppCompatActivity implements Devise
     private void getData(List<String> docs) {
         docs.forEach(n->{
             List<Maintain> items = new ArrayList<Maintain>();
-            db.collection("ttbt/" + n.toLowerCase() + "/data")
+            db.collection("ttbt/" + ds.getMd5(n.toLowerCase()) + "/data")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -124,5 +125,10 @@ public class AllListMaintainActivity extends AppCompatActivity implements Devise
     public List<Devices> getDataDocument() {
         List<Devices> ds = (new DeviceService()).getDataDocument();
         return ds;
+    }
+
+    @Override
+    public String getMd5(String input) {
+        return null;
     }
 }

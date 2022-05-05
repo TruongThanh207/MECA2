@@ -28,13 +28,14 @@ import java.io.Serializable;
 public class ScanActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
     private final int CAMERA_REQUEST_CODE = 101;
+    DeviceService ds = new DeviceService();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
         setPermission();
 
-        Devices[] myListData = (new DeviceService()).getDataDocument().toArray(new Devices[0]);
+        Devices[] myListData = ds.getDataDocument().toArray(new Devices[0]);
 
         codeScanned(myListData);
     }
@@ -50,8 +51,13 @@ public class ScanActivity extends AppCompatActivity {
                     public void run() {
                         if(!result.getText().isEmpty()){
                             for(Devices num : myListData){
-                                if (num.getName().equals(result.getText())){
-                                    Intent intent = new Intent(ScanActivity.this, InfoDeviceActivity.class);
+                                if (ds.getMd5(num.getName().toLowerCase()).equals(result.getText())){
+                                    Intent intent;
+                                    if (num.getName().equals("Cabinet1") || num.getName().equals("Cabinet2")){
+                                        intent = new Intent(ScanActivity.this, CabinetActivity.class);
+                                    } else {
+                                        intent = new Intent(ScanActivity.this, InfoDeviceActivity.class);
+                                    }
                                     intent.putExtra("data",(Serializable) num);
                                     startActivity(intent);
                                     break;

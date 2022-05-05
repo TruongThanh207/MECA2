@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface DeviseData {
     List<Devices> getDataDocument();
+
+    String getMd5(String input);
 }

@@ -30,6 +30,7 @@ import android.widget.EditText;
 import com.example.meca.model.BasicInfoAdapter;
 import com.example.meca.model.Devices;
 import com.example.meca.model.MaintainAdapter;
+import com.example.meca.service.DeviceService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,6 +59,7 @@ public class MaintenanceActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<Map<String, Object>> mapdata;
     String url;
+    DeviceService ds = new DeviceService();
 
     private int lastSelectedYear;
     private int lastSelectedMonth;
@@ -80,7 +82,7 @@ public class MaintenanceActivity extends AppCompatActivity {
 
     public void getMaintainData() {
         mapdata = new ArrayList<>();
-        url = "ttbt/" + device.getName().toLowerCase() + "/data";
+        url = "ttbt/" + ds.getMd5(device.getName().toLowerCase()) + "/data";
         Log.d(TAG, "url  " + url);
         db.collection(url).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

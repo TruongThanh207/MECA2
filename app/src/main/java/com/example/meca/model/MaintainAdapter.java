@@ -1,7 +1,9 @@
 package com.example.meca.model;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,18 +51,54 @@ public class MaintainAdapter extends RecyclerView.Adapter<MaintainAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.textView.setText(listdata.get(position).get("content").toString());
         holder.textView2.setText(listdata.get(position).get("date").toString());
-        holder.imageView.setOnClickListener(v -> db.collection(_url).document((String) Objects.requireNonNull(listdata.get(position)
-                .get("id")))
-                .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(context, "deleted", Toast.LENGTH_SHORT).show();
-                listdata.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, listdata.size());
-            }
-        }));
+        holder.imageView.setOnClickListener(v -> confirmDel(position));
     }
+
+    private void confirmDel(int position) {
+        AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(context);
+
+// Setting Dialog Title
+        alertDialog2.setTitle("Confirm Delete...");
+
+// Setting Dialog Message
+        alertDialog2.setMessage("Are you sure you want delete this file?");
+
+// Setting Icon to Dialog
+        alertDialog2.setIcon(R.drawable.ic_baseline_warning_24);
+
+// Setting Positive "Yes" Btn
+        alertDialog2.setPositiveButton("YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog
+                        db.collection(_url).document((String) Objects.requireNonNull(listdata.get(position)
+                                .get("id")))
+                                .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(context, "deleted", Toast.LENGTH_SHORT).show();
+                                listdata.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, listdata.size());
+                            }
+                        });
+                    }
+                });
+// Setting Negative "NO" Btn
+        alertDialog2.setNegativeButton("NO",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog
+
+                        dialog.cancel();
+                    }
+                });
+
+// Showing Alert Dialog
+        alertDialog2.show();
+
+    }
+
 
     @Override
     public int getItemCount() {

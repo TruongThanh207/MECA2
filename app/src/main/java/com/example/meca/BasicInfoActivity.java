@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meca.model.BasicInfoAdapter;
 import com.example.meca.model.Devices;
+import com.example.meca.service.DeviceService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,6 +27,7 @@ public class BasicInfoActivity extends AppCompatActivity {
     Devices device;
     FirebaseFirestore db1 = FirebaseFirestore.getInstance();
     List<Map<String, Object>> mapdata1;
+    DeviceService ds = new DeviceService();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class BasicInfoActivity extends AppCompatActivity {
     }
     private void getBasicInfoDevice() {
         mapdata1 = new ArrayList<>();
-        String url1 = "ttbt/" + device.getName().toLowerCase() + "/ttcb";
+        String url1 = "ttbt/" + ds.getMd5(device.getName().toLowerCase()) + "/ttcb";
         Log.d(TAG, "url  " + url1);
         db1.collection(url1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
