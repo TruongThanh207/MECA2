@@ -244,7 +244,7 @@ public class MaintenanceActivity extends AppCompatActivity {
         Map<String, Object> data = new HashMap<>();
         data.put("content", content);
         data.put("date", date);
-        db.collection("/ttbt/" + device.getName().toLowerCase() + "/data")
+        db.collection("/ttbt/" + ds.getMd5(device.getName().toLowerCase()) + "/data")
                 .add(data)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
