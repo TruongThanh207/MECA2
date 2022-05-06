@@ -81,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
         img_moto_conveyor = findViewById(R.id.img_moto_conveyor);
         img_conveyor = findViewById(R.id.img_conveyor);
-        img_motorH = findViewById(R.id.imageMotorR);
-        img_motorM = findViewById(R.id.imageMotorL);
         img_sensorL = findViewById(R.id.imageSensorL);
         img_sensorM = findViewById(R.id.imageSensorM);
         img_sensorH = findViewById(R.id.imageSensorH);
@@ -158,139 +156,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        btnPower = findViewById(R.id.power);
-//        btnMotor = findViewById(R.id.switchmotor);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-//        mDatabase.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                dataSnapshot.getChildren().forEach(m -> {
-//                    if ("Power".equals(Objects.requireNonNull(m.getKey()))) {
-//                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) btnPower.setChecked(true);
-//                        else btnPower.setChecked(false);
-//                    }
-//                    if ("Motor".equals(Objects.requireNonNull(m.getKey()))) {
-//                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
-//                            btnMotor.setChecked(true);
-//                            img_moto_conveyor.setImageResource(R.drawable.motor_conveyor_on);
-//                            img_conveyor.setImageResource(R.drawable.conveyor_on);
-//                        }
-//                        else {
-//                            btnMotor.setChecked(false);
-//                            img_moto_conveyor.setImageResource(R.drawable.motor_conveyor);
-//                            img_conveyor.setImageResource(R.drawable.conveyor);
-//                        }
-//                    }
-//                    if ("Senserlow".equals(Objects.requireNonNull(m.getKey()))) {
-//                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
-//                            img_sensorL.setImageResource(R.drawable.sensor_on);
-//                        }
-//                        else {
-//                            img_sensorL.setImageResource(R.drawable.sensor);
-//                        }
-//                    }
-//                    if ("Senserhigh".equals(Objects.requireNonNull(m.getKey()))) {
-//                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
-//                            img_sensorH.setImageResource(R.drawable.sensor_on);
-//                        }
-//                        else {
-//                            img_sensorH.setImageResource(R.drawable.sensor);
-//                        }
-//                    }
-//                    if ("Sensermedium".equals(Objects.requireNonNull(m.getKey()))) {
-//                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
-//                            img_sensorM.setImageResource(R.drawable.sensor_on);
-//                        }
-//                        else {
-//                            img_sensorM.setImageResource(R.drawable.sensor);
-//                        }
-//                    }
-//                    if ("Motor Med Forward".equals(Objects.requireNonNull(m.getKey()))) {
-//                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
-//                            motor_med_fwd = "ON";
-//                        }
-//                        else {
-//                            motor_med_fwd = "OFF";
-//                        }
-//                    }
-//                    if ("Motor Med Reverse".equals(Objects.requireNonNull(m.getKey()))) {
-//                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")){
-//                            motor_med_rev = "ON";
-//                        }
-//                        else {
-//                            motor_med_rev = "OFF";
-//                        }
-//                    }
-//
-//                    if ("Motor High Forward".equals(Objects.requireNonNull(m.getKey()))) {
-//                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
-//                            motor_high_fwd = "ON";
-//                        }
-//                        else {
-//                            motor_high_fwd = "OFF";
-//                        }
-//                    }
-//                    if ("Motor High Reverse".equals(Objects.requireNonNull(m.getKey()))) {
-//                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")){
-//                            motor_high_rev = "ON";
-//                        }
-//                        else {
-//                            motor_high_rev = "OFF";
-//                        }
-//                    }
-//                });
-//                if (motor_high_rev.equals("OFF") && motor_high_fwd.equals("OFF")){
-//                    img_motorH.setImageResource(R.drawable.stepping_motor);
-//                }
-//                if (motor_med_rev.equals("ON") && motor_high_fwd.equals("OFF")){
-//                    img_motorH.setImageResource(R.drawable.stepping_motor_rev);
-//                }
-//                if (motor_high_rev.equals("OFF") && motor_high_fwd.equals("ON")){
-//                    img_motorH.setImageResource(R.drawable.stepping_motor_fwd);
-//                }
-//                if (motor_high_rev.equals("ON") && motor_high_fwd.equals("ON")){
-//                    Toast.makeText(MainActivity.this, "Data Conflict!!", Toast.LENGTH_LONG).show();
-//                }
-//                if (motor_med_rev.equals("OFF") && motor_med_fwd.equals("OFF")){
-//                    img_motorM.setImageResource(R.drawable.stepping_motor);
-//                }
-//                if (motor_med_rev.equals("ON") && motor_med_fwd.equals("OFF")){
-//                    img_motorM.setImageResource(R.drawable.stepping_motor_rev);
-//                }
-//                if (motor_med_rev.equals("OFF") && motor_med_fwd.equals("ON")){
-//                    img_motorM.setImageResource(R.drawable.stepping_motor_fwd);
-//                }
-//                if (motor_med_rev.equals("ON") && motor_med_fwd.equals("ON")){
-//                    Toast.makeText(MainActivity.this, "Data Conflict!!", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(MainActivity.this, "Not found data!", Toast.LENGTH_LONG).show();
-//            }
-//        });
-//
-//        btnPower.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked){
-//                    mDatabase.child("Power").child("Value").setValue("ON");
-//                } else {
-//                    mDatabase.child("Power").child("Value").setValue("OFF");
-//                }
-//            }
-//        });
-//        btnMotor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked){
-//                    mDatabase.child("Motor").child("Value").setValue("ON");
-//                } else {
-//                    mDatabase.child("Motor").child("Value").setValue("OFF");
-//                }
-//            }
-//        });
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataSnapshot.getChildren().forEach(m -> {
+                    if ("RUN".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
+                            img_moto_conveyor.setImageResource(R.drawable.motor_conveyor_on);
+                            img_conveyor.setImageResource(R.drawable.conveyor_on);
+                        }
+                        else {
+                            img_moto_conveyor.setImageResource(R.drawable.motor_conveyor);
+                            img_conveyor.setImageResource(R.drawable.conveyor);
+                        }
+                    }
+                    if ("Senserlow".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
+                            img_sensorL.setImageResource(R.drawable.sensor_on);
+                        }
+                        else {
+                            img_sensorL.setImageResource(R.drawable.sensor);
+                        }
+                    }
+                    if ("Sensermedium".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
+                            img_sensorM.setImageResource(R.drawable.sensor_on);
+                        }
+                        else {
+                            img_sensorM.setImageResource(R.drawable.sensor);
+                        }
+                    }
+                    if ("Senserhigh".equals(Objects.requireNonNull(m.getKey()))) {
+                        if (Objects.requireNonNull(m.child("Value").getValue()).toString().equals("ON")) {
+                            img_sensorH.setImageResource(R.drawable.sensor_on);
+                        }
+                        else {
+                            img_sensorH.setImageResource(R.drawable.sensor);
+                        }
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(MainActivity.this, "Not found data!", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override

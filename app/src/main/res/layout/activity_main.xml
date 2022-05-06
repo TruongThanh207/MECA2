@@ -13,23 +13,6 @@
         android:background="@color/white"
         tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/activity_main_tv_empty"
-            style="@style/InformationTextView"
-            android:layout_width="77dp"
-            android:layout_height="41dp"
-            android:rotation="90"
-            android:text="Power"
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.952"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023" />
-
         <ImageView
             android:id="@+id/img_conveyor"
             android:layout_width="196dp"
@@ -46,40 +29,32 @@
             app:layout_constraintVertical_bias="0.511"
             app:srcCompat="@drawable/conveyor" />
 
-
-        <Switch
-            android:id="@+id/power"
-            android:layout_width="57dp"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/speed"
+            android:layout_width="80dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="68dp"
+            android:gravity="center"
             android:rotation="90"
-            android:showText="true"
-            android:textOff="OFF"
-            android:textOn="ON"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Speeds"
+            app:layout_constraintBottom_toTopOf="@+id/CountHigh"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.92"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_main_tv_empty"
-            app:layout_constraintVertical_bias="0.077"
-            tools:checked="false"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <Switch
-            android:id="@+id/switchmotor"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvspeed"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="68dp"
+            android:gravity="center"
             android:rotation="90"
-            android:showText="true"
-            android:textOff="OFF"
-            android:textOn="ON"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="15"
+            app:layout_constraintBottom_toTopOf="@+id/CountHigh"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.096"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.262"
-            tools:checked="false"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/CountMedium"
@@ -199,30 +174,6 @@
             app:layout_constraintTop_toBottomOf="@+id/imageSensorM"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/sensor" />
-
-        <ImageView
-            android:id="@+id/imageMotorR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.262"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.622"
-            app:srcCompat="@drawable/stepping_motor" />
-
-        <ImageView
-            android:id="@+id/imageMotorL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.642"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.622"
-            app:srcCompat="@drawable/stepping_motor" />
 
         <ImageView
             android:id="@+id/img_moto_conveyor"

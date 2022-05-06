@@ -53,7 +53,7 @@ public class ScanActivity extends AppCompatActivity {
                             for(Devices num : myListData){
                                 if (ds.getMd5(num.getName().toLowerCase()).equals(result.getText())){
                                     Intent intent;
-                                    if (num.getName().equals("Cabinet1") || num.getName().equals("Cabinet2")){
+                                    if (num.getName().equals("Tủ điện điều khiển") || num.getName().equals("Tủ điện động lực")){
                                         intent = new Intent(ScanActivity.this, CabinetActivity.class);
                                     } else {
                                         intent = new Intent(ScanActivity.this, InfoDeviceActivity.class);

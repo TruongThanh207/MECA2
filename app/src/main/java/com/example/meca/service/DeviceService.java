@@ -14,13 +14,11 @@ public class DeviceService implements DeviseData{
     @Override
     public List<Devices> getDataDocument() {
         List<Devices> myListData = new ArrayList<Devices>();
-                myListData.add(new Devices("Cabinet1", R.drawable.plc).setDevice(false));
-                myListData.add(new Devices("Cabinet2", R.drawable.hmi).setDevice(false));
-                myListData.add(new Devices("PLC", R.drawable.plc).setType("cabinet1"));
-                myListData.add(new Devices("HMI", R.drawable.hmi).setType("cabinet1"));
-                myListData.add(new Devices("Inverter", R.drawable.inverter).setType("cabinet2"));
-                myListData.add(new Devices("Motor conveyor", R.drawable.motor));
-                myListData.add(new Devices("Motor high", R.drawable.motor_br));
+                myListData.add(new Devices("Tủ điện điều khiển", R.drawable.plc).setDevice(false));
+                myListData.add(new Devices("Tủ điện động lực", R.drawable.hmi).setDevice(false));
+                myListData.add(new Devices("PLC", R.drawable.plc).setType("tủ điện điều khiển"));
+                myListData.add(new Devices("HMI", R.drawable.hmi).setType("tủ điện điều khiển"));
+                myListData.add(new Devices("Inverter", R.drawable.inverter).setType("tủ điện động lực"));
                 myListData.add(new Devices("Motor medium", R.drawable.motor_br));
                 myListData.add(new Devices("Senser low", R.drawable.senser_br));
                 myListData.add(new Devices("Senser medium", R.drawable.senser_br));

@@ -71,13 +71,13 @@ public class MaintenanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_maintenance);
         device = (Devices) getIntent().getSerializableExtra("data");
 
+        getMaintainData();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle("Thông tin bảo trì " + device.getName());
+
         drawerLayout = findViewById(R.id.activity_maintain_drawer);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
-
-        getMaintainData();
-        getSupportActionBar().setTitle("Thông tin bảo trì " + device.getName());
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void getMaintainData() {
