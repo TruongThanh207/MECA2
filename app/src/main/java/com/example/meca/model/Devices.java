@@ -1,13 +1,15 @@
 package com.example.meca.model;
 
+import android.content.Intent;
+
 import java.io.Serializable;
 
 public class Devices implements Serializable {
     private String name;
-    private int imgId;
+    private Integer imgId;
     private String type;
     private boolean isDevice;
-    public Devices(String name, int imgId) {
+    public Devices(String name, Integer imgId) {
         this.name = name;
         this.imgId = imgId;
         this.type = null;
@@ -19,10 +21,10 @@ public class Devices implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public int getImgId() {
+    public Integer getImgId() {
         return imgId;
     }
-    public void setImgId(int imgId) {
+    public void setImgId(Integer imgId) {
         this.imgId = imgId;
     }
 

@@ -28,6 +28,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
+import com.example.meca.model.Devices;
+import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
@@ -58,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
 //    int flag = 0;
 //    String motor_med_fwd = "OFF", motor_med_rev = "OFF";
 //    String motor_high_fwd = "OFF", motor_high_rev = "OFF";
+
+    FirebaseDatabase firebaseDatabase;
+
+    // creating a variable for our Database
+    // Reference for Firebase.
+    DatabaseReference databaseReference;
     
     ProgressDialog pd;
 
@@ -156,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
                showChangePasswordDialog();
             }
         });
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -204,7 +211,15 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Not found data!", Toast.LENGTH_LONG).show();
             }
         });
-
+        tvdiagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Devices flow = new Devices("flow", null);
+                Intent intent = new Intent(MainActivity.this, ViewpdfActivity.class);
+                intent.putExtra("data", flow);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

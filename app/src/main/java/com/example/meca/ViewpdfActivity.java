@@ -1,6 +1,7 @@
 package com.example.meca;
 
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
 
 public class ViewpdfActivity extends AppCompatActivity {
 
@@ -36,12 +38,10 @@ public class ViewpdfActivity extends AppCompatActivity {
     private PDFView pdfView;
 
     private Devices device;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewpdf);
-
         // initializing variable for pdf view.
         pdfView = findViewById(R.id.pdfView);
 

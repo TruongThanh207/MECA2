@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class AllListMaintainActivity extends AppCompatActivity implements DeviseData {
     ExpandableListAdapter listAdapter;
@@ -56,7 +57,7 @@ public class AllListMaintainActivity extends AppCompatActivity implements Devise
 
     private void getDocumentID() {
         getDataDocument().forEach(devices -> {
-            documents.add(devices.getName());
+            if (devices.isDevice()) documents.add(devices.getName());
         });
     }
 
@@ -70,7 +71,8 @@ public class AllListMaintainActivity extends AppCompatActivity implements Devise
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    items.add(new Maintain(document.getData().get("content").toString(), document.getData().get("date").toString()));
+                                    Log.d(TAG, "ads" + ds.getMd5(n.toLowerCase()));
+                                    items.add(new Maintain(Objects.requireNonNull(document.getData().get("content")).toString(), Objects.requireNonNull(document.getData().get("date")).toString()));
                                 }
                                 listDataChild.put(n.toLowerCase(), items);
                                 if(docs.get(docs.size() - 1).equals(n)){
@@ -86,29 +88,6 @@ public class AllListMaintainActivity extends AppCompatActivity implements Devise
                                             // "Group Clicked " + listDataHeader.get(groupPosition),
                                             // Toast.LENGTH_SHORT).show();
                                             return false;
-                                        }
-                                    });
-
-                                    // Listview Group expanded listener
-                                    expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-                                        @Override
-                                        public void onGroupExpand(int groupPosition) {
-                                            Toast.makeText(getApplicationContext(),
-                                                    documents.get(groupPosition) + " Expanded",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-
-                                    // Listview Group collasped listener
-                                    expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-                                        @Override
-                                        public void onGroupCollapse(int groupPosition) {
-                                            Toast.makeText(getApplicationContext(),
-                                                    documents.get(groupPosition) + " Collapsed",
-                                                    Toast.LENGTH_SHORT).show();
-
                                         }
                                     });
                                 }
