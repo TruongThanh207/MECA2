@@ -19,7 +19,7 @@ public class DeviceService implements DeviseData{
                 myListData.add(new Devices("PLC", R.drawable.plc).setType("tủ điện điều khiển"));
                 myListData.add(new Devices("HMI", R.drawable.hmi).setType("tủ điện điều khiển"));
                 myListData.add(new Devices("Inverter", R.drawable.inverter).setType("tủ điện động lực"));
-                myListData.add(new Devices("Motor medium", R.drawable.motor_br));
+                myListData.add(new Devices("Motor conveyor", R.drawable.motor));
                 myListData.add(new Devices("Senser low", R.drawable.senser_br));
                 myListData.add(new Devices("Senser medium", R.drawable.senser_br));
                 myListData.add(new Devices("Senser high", R.drawable.senser_br));

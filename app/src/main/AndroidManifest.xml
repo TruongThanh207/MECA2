@@ -9,9 +9,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/product"
+        android:icon="@drawable/meca"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/product"
+        android:roundIcon="@drawable/meca"
         android:supportsRtl="true"
         android:theme="@style/Theme.MECA">
         <activity

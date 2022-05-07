@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imgAvata;
     private TextView tvEmail,tvName;
 //    Switch btnPower, btnMotor;
-    TextView tvDataLow,tvDataMedium,tvDataHigh;
+    TextView tvDataLow,tvDataMedium,tvDataHigh, tvSpeed;
     TextView tvHome,tvlogout,tvdevices, tvhotline, tvhelp, tvMaintain, tvdiagram, tvresetpass;
     ImageView img_moto_conveyor, img_conveyor;
     ImageView img_motorH, img_motorM;
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         tvDataHigh = findViewById(R.id.tvCHigh);
         tvDataMedium = findViewById(R.id.tvCMedium);
         tvDataLow = findViewById(R.id.tvCLow);
+        tvSpeed = findViewById(R.id.tvspeed);
 
         img_moto_conveyor = findViewById(R.id.img_moto_conveyor);
         img_conveyor = findViewById(R.id.img_conveyor);
@@ -245,6 +246,7 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("Count High/Value");
         DatabaseReference myRef1 = database.getReference("Count Medium/Value");
         DatabaseReference myRef2 = database.getReference("Count Low/Value");
+        DatabaseReference myRef3 = database.getReference("Speeds/Value");
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -277,6 +279,18 @@ public class MainActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
                 tvDataLow.setText(value);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+        myRef3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                tvSpeed.setText(value);
             }
             @Override
             public void onCancelled(DatabaseError error) {
